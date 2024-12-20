@@ -1,0 +1,59 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    <title>{% block title %}Django Tailwind{% endblock title %}</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		{% tailwind_preload_css %}
+		{% tailwind_css %}
+		{% block head %}{% endblock head %}
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+	</head>
+
+	<body class="bg-gray-50 font-['Inter']">
+		<nav class="bg-gradient-to-r from-blue-600 to-blue-800 shadow-lg">
+			<div class="container mx-auto px-4 py-3">
+				<div class="flex items-center justify-between">
+					<a href="/" class="flex items-center space-x-3">
+						<svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+							<path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+						</svg>
+						<span class="text-white text-xl font-bold tracking-tight">GitHub Profile Scraper</span>
+					</a>
+					{% comment %} <div class="flex items-center space-x-6">
+						{% if user.is_authenticated %}
+							<a href="{% url 'scraper:home' %}" class="text-white hover:text-blue-200 transition-colors duration-200 text-sm font-medium">
+								Scrape Profile
+							</a>
+							<a href="{% url 'account_logout' %}" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 transition-colors duration-200">
+								Logout
+							</a>
+						{% else %}
+							<a href="{% url 'account_login' %}" class="text-white hover:text-blue-200 transition-colors duration-200 text-sm font-medium">
+								Login
+							</a>
+							<a href="{% url 'account_signup' %}" class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-blue-700 bg-white hover:bg-blue-50 transition-colors duration-200">
+								Sign Up
+							</a>
+						{% endif %}
+					</div> {% endcomment %}
+				</div>
+			</div>
+		</nav>
+		<main class="min-h-screen">
+			<div class="container mx-auto px-4 py-8">
+				{% block content %}
+				{% endblock %}
+			</div>
+		</main>
+		<footer class="bg-white border-t border-gray-200 mt-auto">
+			<div class="container mx-auto px-4 py-6">
+				<p class="text-center text-gray-500 text-sm">
+					© {% now "Y" %} GitHub Profile Scraper. All rights reserved.
+				</p>
+			</div>
+		</footer>
+	</body>
+</html>

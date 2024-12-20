@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Github Profile
+{% endblock title %}
+
+{% block content %}
+    <div class="flex justify-center items-center min-h-[calc(100vh-200px)]">
+        <div class="bg-white rounded-xl shadow-lg w-full max-w-4xl mx-4 overflow-hidden backdrop-blur-sm bg-white/90">
+        <div class="relative bg-gradient-to-r from-blue-600 to-blue-800 p-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-6">
+                    <img src="{{ profile.avatar_url|default_if_none:'https://github.githubassets.com/images/modules/logos_page/Octocat.png' }}" 
+                         alt="{{ profile.name }}'s Avatar" 
+                         class="w-24 h-24 rounded-full object-cover ring-4 ring-white/30">
+                    <div class="text-white">
+                        <h1 class="text-3xl font-bold tracking-tight">{{ profile.name|default_if_none:profile.username }}</h1>
+                        <p class="text-blue-100">@{{ profile.username }}</p>
+                    </div>
+                </div>
+                <a href="{{ profile.profile_url }}" target="_blank" 
+                   class="inline-flex items-center px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-all duration-200 backdrop-blur-sm">
+                    <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                    </svg>
+                    View on GitHub
+                </a>
+            </div>
+        </div>
+        
+        <div class="p-8">
+            <div class="bg-gray-50 p-6 rounded-xl mb-8 border border-gray-100">
+                <p class="text-gray-700 leading-relaxed">{{ profile.bio|default_if_none:'No bio available' }}</p>
+            </div>
+            
+            <div class="grid grid-cols-3 gap-6">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl border border-blue-200 transition-transform hover:scale-105 duration-300">
+                    <div class="flex flex-col items-center">
+                        <p class="text-4xl font-bold text-blue-600 mb-2">{{ profile.public_repos }}</p>
+                        <p class="text-blue-800 font-medium">Public Repos</p>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl border border-green-200 transition-transform hover:scale-105 duration-300">
+                    <div class="flex flex-col items-center">
+                        <p class="text-4xl font-bold text-green-600 mb-2">{{ profile.followers }}</p>
+                        <p class="text-green-800 font-medium">Followers</p>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl border border-purple-200 transition-transform hover:scale-105 duration-300">
+                    <div class="flex flex-col items-center">
+                        <p class="text-4xl font-bold text-purple-600 mb-2">{{ profile.following }}</p>
+                        <p class="text-purple-800 font-medium">Following</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 flex justify-end">
+                <a href="{% url 'scraper:home' %}" 
+                   class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-lg hover:from-blue-700 hover:to-blue-800 transition-all duration-200 shadow-md hover:shadow-lg">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    Scrape Another Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
